@@ -32,8 +32,9 @@ LearnerDensNonparametric = R6Class("LearnerDensNonparametric",
           ParamDbl$new(id = "delta", tags = "train"),
           ParamDbl$new(id = "h.weights", default = 1, tags = "train"),
           ParamUty$new(id = "hmult", default = 1, tags = "train"),
-          ParamFct$new(id = "method", default = "normal",
-                       levels = c("normal", "cv", "sj", "df", "aicc"), tags = "train"),
+          ParamFct$new(
+            id = "method", default = "normal",
+            levels = c("normal", "cv", "sj", "df", "aicc"), tags = "train"),
           ParamLgl$new(id = "positive", default = FALSE, tags = "train"),
           ParamUty$new(id = "verbose", default = 1, tags = "train")
         )
@@ -59,8 +60,8 @@ LearnerDensNonparametric = R6Class("LearnerDensNonparametric",
         pars$weights = task$weights$weight
       }
 
-      pdf <- function(x1) {} # nolint
-      body(pdf) <- substitute({
+      pdf = function(x1) {} # nolint
+      body(pdf) = substitute({
         mlr3misc::invoke(sm::sm.density,
           x = data, eval.points = x1, display = "none", show.script = FALSE,
           .args = pars)$estimate
