@@ -101,6 +101,7 @@ jobs:
         if: runner.os == 'macOS' && matrix.config.r != 'devel'
         run: |
           brew install ccache
+          brew cask install xquartz
           wget https://cran.r-project.org/bin/macosx/tools/clang-7.0.0.pkg
           sudo installer -package clang-7.0.0.pkg -target /
           mkdir -p ~/.R && echo -e 'CXX_STD = CXX14\n\nCC=ccache /usr/local/clang7/bin/clang\nCC11=ccache /usr/local/clang7/bin/clang\nCC14=ccache /usr/local/clang7/bin/clang\nCXX=ccache /usr/local/clang7/bin/clang++\nCXX11=ccache /usr/local/clang7/bin/clang++\nCXX14=ccache /usr/local/clang7/bin/clang++\nC11=ccache /usr/local/clang7/bin/clang++\nC14=ccache /usr/local/clang7/bin/clang++\nF77=ccache gfortran/nCFLAGS=-isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk\nCXXFLAGS=-isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk\nCCFLAGS=-isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk\nCFLAGS=-isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk' > $HOME/.R/Makevars
@@ -111,6 +112,7 @@ jobs:
         if: runner.os == 'macOS' && matrix.config.r == 'devel'
         run: |
           brew install ccache
+          brew cask install xquartz
           # install SDK 10.13 (High Sierra, used by CRAN)
           wget -nv https://github.com/phracker/MacOSX-SDKs/releases/download/10.15/MacOSX10.13.sdk.tar.xz
           tar fxz MacOSX10.13.sdk.tar.xz
