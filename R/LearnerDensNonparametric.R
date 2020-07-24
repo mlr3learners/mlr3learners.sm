@@ -60,16 +60,17 @@ LearnerDensNonparametric = R6Class("LearnerDensNonparametric",
         pars$weights = task$weights$weight
       }
 
-      pdf = function(x1) {} # nolint
+      pdf = function(x) {} # nolint
       body(pdf) = substitute({
         mlr3misc::invoke(sm::sm.density,
-          x = data, eval.points = x1, display = "none", show.script = FALSE,
+          x = data, eval.points = x, display = "none", show.script = FALSE,
           .args = pars)$estimate
       }, list(data = task$truth()))
 
       distr6::Distribution$new(
         name = "Nonparametric Density",
         short_name = "NonparDens",
+        type = set6::Reals$new(),
         pdf = pdf)
     },
 
